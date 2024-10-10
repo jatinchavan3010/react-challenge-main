@@ -6,7 +6,7 @@ type CountryListProps = {
 
 const CountryList: React.FC<CountryListProps> = ({ countryList }) => {
   return (
-    <section className="countries-info">
+    <section className="countries-section">
       {countryList.map((country: Country) => {
         return <CountryCard country={country} />;
       })}

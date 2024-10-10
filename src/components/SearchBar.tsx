@@ -1,26 +1,49 @@
 import { useState } from "react";
 
-type SearchBarProps = {
-  handleSearch: (search: string) => void;
-};
+interface SearchBarProps {
+  onSearch: (search: string) => void;
+  onShowAll: () => void;
+}
 
-const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onShowAll }) => {
   const [search, setSearch] = useState("");
 
+  const handleSearch = () => {
+    if (search.trim()) {
+      onSearch(search);
+    }
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
-    <>
-      <input
-        className="search-input"
-        type="text"
-        placeholder="Search..."
-        onChange={(event) => {
-          setSearch(event.target.value);
-        }}
-      />
-      <div className="search-button" onClick={() => handleSearch(search)}>
-        Search
+    <section className="search-section">
+      <div className="search-container">
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Search for a country..."
+          onChange={(event) => {
+            setSearch(event.target.value);
+          }}
+          onKeyDown={handleKeyDown}
+        />
+        <button
+          className="search-button"
+          onClick={handleSearch}
+          disabled={!search.length}
+        >
+          Search
+        </button>
       </div>
-    </>
+      <button className="show-all-btn" onClick={onShowAll}>
+        Show All
+      </button>
+    </section>
   );
 };
 

@@ -18,8 +18,8 @@ const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
   return (
     <div className="country">
       <img src={`${country.flags.svg}`} className="country-flag-image" />
-      <section>
-        <h3 className="country-name">{country.name.common}</h3>
+      <section className="country-info">
+        <h2 className="country-name">{country.name.common}</h2>
         <p className="country-capital">Capital: {country.capital}</p>
         <p className="country-region">Region: {country.region}</p>
       </section>
