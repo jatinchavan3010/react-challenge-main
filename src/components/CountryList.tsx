@@ -1,14 +1,4 @@
-type Country = {
-  name: {
-    official: string;
-  };
-  capital: string;
-  region: string;
-  flags: {
-    svg: string;
-    alt: string;
-  };
-};
+import CountryCard, { Country } from "./CountryCard";
 
 type CountryListProps = {
   countryList: Country[];
@@ -16,18 +6,11 @@ type CountryListProps = {
 
 const CountryList: React.FC<CountryListProps> = ({ countryList }) => {
   return (
-    <div>
+    <section className="countries-info">
       {countryList.map((country: Country) => {
-        return (
-          <div>
-            {country.name.official}
-            <br />
-            Capital: {country.capital}
-            Region: {country.region}
-          </div>
-        );
+        return <CountryCard country={country} />;
       })}
-    </div>
+    </section>
   );
 };
 

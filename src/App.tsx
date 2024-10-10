@@ -7,10 +7,12 @@ import CountryList from "./components/CountryList";
 function App() {
   const [countryList, setCountryList] = useState<any>([]);
 
-  const handleSearch = (search: string) => {
-    fetch(`https://restcountries.com/v3.1/name/${search}`)
-      .then((res) => res.json())
-      .then((data) => setCountryList(data));
+  const handleSearch = async (search: string) => {
+    const response = await fetch(
+      `https://restcountries.com/v3.1/name/${search}`
+    );
+    const data = await response.json();
+    setCountryList(data);
   };
 
   return (

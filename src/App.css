@@ -1,4 +1,10 @@
+p {
+  margin: 5px 0;
+}
+
 .header {
+  box-shadow: 0 6px 12px -2px rgba(50, 50, 93, 0.25),
+    0 3px 7px -3px rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: space-between;
   padding: 20px 40px;
@@ -15,4 +21,29 @@
   margin: 8px;
   border: 1px solid black;
   cursor: pointer;
+}
+
+.countries-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 10px 25px;
+
+  .country {
+    align-items: flex-start;
+    /* border-radius: 10px; */
+    display: flex;
+    flex-direction: column;
+    /* margin: 10px 10px 55px; */
+    width: 300px;
+
+    .country-flag-image {
+      border-radius: 10px 10px 0 0;
+      height: 170px;
+      object-fit: cover;
+      padding: 0;
+      transition: all 0.1s ease-in-out;
+      width: 100%;
+    }
+  }
 }
