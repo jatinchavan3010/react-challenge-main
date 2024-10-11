@@ -6,8 +6,7 @@ import CountryList from "./components/CountryList";
 import { Country } from "./components/CountryCard";
 import ErrorCard from "./components/ErrorCard";
 import Loading from "./components/Loading";
-
-const BASE_URL = "https://restcountries.com/v3.1";
+import { BASE_URL, Region } from "./constants";
 
 interface ErrorState {
   message: string;
@@ -29,6 +28,7 @@ const App = () => {
     try {
       const response = await fetch(url);
 
+      // Check if the response is ok
       if (!response.ok) {
         throw new Error(
           response.status === 404
@@ -50,14 +50,27 @@ const App = () => {
     }
   };
 
+  // Handle region selection and fetch countries based on selected region
+  const handleRegionSelect = (region: string) => {
+    if (!region) {
+      setCountryList([]);
+      return;
+    }
+
+    const url =
+      region === Region.All
+        ? `${BASE_URL}/all` // Fetch all countries if "All" is selected
+        : `${BASE_URL}/region/${region}`; // Fetch countries by selected region
+
+    fetchCountries(url);
+  };
+
+  // Handle searching for countries by name
   const handleSearch = (search: string) => {
     fetchCountries(`${BASE_URL}/name/${search}`);
   };
 
-  const handleShowAll = () => {
-    fetchCountries(`${BASE_URL}/all`);
-  };
-
+  // Clear the current search and reset states
   const clearSearch = () => {
     setCountryList([]);
     setError({
@@ -70,8 +83,8 @@ const App = () => {
     <>
       <SearchBar
         onSearch={handleSearch}
-        onShowAll={handleShowAll}
         onClear={clearSearch}
+        onRegionSelect={handleRegionSelect}
       />
       {loading && <Loading />}
       {error.isError && <ErrorCard error={error.message} />}

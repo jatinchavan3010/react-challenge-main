@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import CountryCard, { Country } from "./CountryCard";
 
 type CountryListProps = {
@@ -20,7 +20,7 @@ const CountryList: React.FC<CountryListProps> = ({ countryList }) => {
         </section>
       ) : (
         <p className="no-search-message" data-testid="no-search-message">
-          Please search for a country!
+          Please enter a country name or choose a region!
         </p>
       )}
     </>

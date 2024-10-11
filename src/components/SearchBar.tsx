@@ -1,28 +1,40 @@
 import { useState } from "react";
+import { Region } from "../constants";
 
 interface SearchBarProps {
   onSearch: (search: string) => void;
-  onShowAll: () => void;
   onClear: () => void;
+  onRegionSelect: (region: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
-  onShowAll,
   onClear,
+  onRegionSelect,
 }) => {
   const [search, setSearch] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
 
+  // Function to handle searching for a country
   const handleSearch = () => {
     if (search.trim()) {
       onSearch(search);
+      setSelectedRegion("");
     }
   };
 
+  // Function to handle pressing "Enter" key in the search input
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       handleSearch();
     }
+  };
+
+  // Function to handle region selection
+  const handleRegionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const region = event.target.value;
+    setSelectedRegion(region);
+    onRegionSelect(region);
   };
 
   return (
@@ -51,23 +63,29 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </button>
       </div>
       <div className="btn-container">
-        <button
-          className="show-all-btn"
-          aria-label="Show all countries"
-          data-testid="show-all-button"
-          onClick={() => {
-            setSearch("");
-            onShowAll();
-          }}
+        <select
+          className="select-region"
+          data-testid="select-region"
+          value={selectedRegion}
+          onChange={handleRegionChange}
+          aria-label="Select a region"
         >
-          Show All
-        </button>
+          <option value={""} disabled>
+            Select Region
+          </option>
+          <option value={Region.All}>All</option>
+          <option value={Region.Africa}>Africa</option>
+          <option value={Region.Americas}>Americas</option>
+          <option value={Region.Asia}>Asia</option>
+          <option value={Region.Europe}>Europe</option>
+        </select>
         <button
           className="clear-btn"
-          aria-label="Clear countries"
+          aria-label="Clear result"
           data-testid="clear-all-button"
           onClick={() => {
             setSearch("");
+            setSelectedRegion("");
             onClear();
           }}
         >

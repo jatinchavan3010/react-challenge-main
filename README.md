@@ -22,6 +22,14 @@ Update this `README` with anything that you'd like to do if you had more time.
 6. Appearance: Style is secondary; however, a basic, user-friendly UI is appreciated
 7. Anything else: You are welcome to add any features that highlight your capabilities
 
+### Additional Improvements If I Had More Time
+
+1. Additional Filters and Sorting Options.
+2. Error Boundary Component as the application grows for handling render errors gracefully.
+3. More test cases particularly with filters and search as the application grows.
+4. It would be beneficial to implement pagination when search results become long.
+5. Implement caching techniques to optimize and make the app more efficient.
+
 ## Getting Started
 
 ### Scripts
@@ -36,4 +44,10 @@ npm install
 
 ```sh
 npm run dev
+```
+
+3. Test locally
+
+```sh
+npm run test
 ```

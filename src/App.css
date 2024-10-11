@@ -54,6 +54,7 @@ p {
   position: sticky;
   top: 0;
   background-color: var(--color-header-background);
+  z-index: 99;
 }
 
 .search-container {
@@ -67,7 +68,7 @@ p {
   border: none;
   font-size: 18px;
   outline: none;
-  padding: 20px 250px 20px 20px;
+  padding: 15px 250px 15px 20px;
 }
 
 .btn-container {
@@ -76,14 +77,13 @@ p {
 }
 
 .search-button,
-.show-all-btn,
 .clear-btn {
   border-radius: 8px;
   box-shadow: var(--box-shadow-header);
   border: none;
   font-size: 18px;
   outline: none;
-  padding: 20px;
+  padding: 15px 20px;
   cursor: pointer;
   color: var(--color-text-primary);
   background-color: var(--color-button-background);
@@ -91,7 +91,6 @@ p {
 }
 
 .search-button:hover,
-.show-all-btn:hover,
 .clear-btn:hover {
   background-color: var(--color-button-background-hover);
 }
@@ -99,6 +98,21 @@ p {
 .search-button:disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.select-region {
+  width: 165px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.search-button:focus,
+.clear-btn:focus,
+.search-input:focus,
+.select-region:focus {
+  outline: 2px solid var(--color-button-background);
+  outline-offset: 2px;
 }
 
 /* Countries Section */
@@ -123,13 +137,20 @@ p {
   border-radius: 8px;
   overflow: hidden;
   padding-bottom: 24px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   background-color: var(--color-header-background);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.country-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 140, 66, 0.9);
 }
 
 .country-flag-image {
   height: 160px;
-  overflow: hidden;
+  width: 100%;
+  margin: auto;
 }
 
 .country-flag-image img {

@@ -1,23 +1,20 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import SearchBar from "./SearchBar";
 import { describe, it, expect, vi } from "vitest"; // Import from vitest
+import { Region } from "../constants";
 
 describe("SearchBar Component", () => {
   it("renders search input and buttons", () => {
-    const mockOnSearch = vi.fn();
-    const mockOnShowAll = vi.fn();
-    const mockOnClear = vi.fn();
-
     render(
       <SearchBar
-        onSearch={mockOnSearch}
-        onShowAll={mockOnShowAll}
-        onClear={mockOnClear}
+        onSearch={() => {}}
+        onRegionSelect={() => {}}
+        onClear={() => {}}
       />
     );
 
     expect(screen.getByTestId("search-input")).toBeInTheDocument();
-    expect(screen.getByTestId("show-all-button")).toBeInTheDocument();
+    expect(screen.getByTestId("select-region")).toBeInTheDocument();
     expect(screen.getByTestId("clear-all-button")).toBeInTheDocument();
   });
 
@@ -27,7 +24,7 @@ describe("SearchBar Component", () => {
     render(
       <SearchBar
         onSearch={mockOnSearch}
-        onShowAll={() => {}}
+        onRegionSelect={() => {}}
         onClear={() => {}}
       />
     );
@@ -38,7 +35,7 @@ describe("SearchBar Component", () => {
     // Change the input value
     fireEvent.change(searchInput, { target: { value: "Canada" } });
 
-    // Assert the input is enabled
+    // Assert the search input is enabled
     expect(searchInput).toBeEnabled();
 
     // Click the search button
@@ -50,27 +47,33 @@ describe("SearchBar Component", () => {
 
   it("disables the search button when input is empty", () => {
     render(
-      <SearchBar onSearch={() => {}} onShowAll={() => {}} onClear={() => {}} />
+      <SearchBar
+        onSearch={() => {}}
+        onRegionSelect={() => {}}
+        onClear={() => {}}
+      />
     );
 
     expect(screen.getByTestId("search-button")).toBeDisabled();
   });
 
-  it("calls onShowAll when Show All button is clicked", () => {
-    const mockOnShowAll = vi.fn();
+  it("renders selected region country cards", () => {
+    const mockOnRegionSelect = vi.fn();
 
     render(
       <SearchBar
         onSearch={() => {}}
-        onShowAll={mockOnShowAll}
+        onRegionSelect={mockOnRegionSelect}
         onClear={() => {}}
       />
     );
 
-    // Click the Show All button
-    fireEvent.click(screen.getByTestId("show-all-button"));
+    const regionSelect = screen.getByTestId("select-region");
 
-    // Assert that onShowAll was called
-    expect(mockOnShowAll).toHaveBeenCalledTimes(1);
+    fireEvent.change(regionSelect, { target: { value: Region.Asia } });
+
+    // Assert that OnRegionSelect was called and Asia region was rendered
+    expect(mockOnRegionSelect).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("Asia")).toBeInTheDocument();
   });
 });
