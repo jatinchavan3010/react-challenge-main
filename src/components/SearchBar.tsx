@@ -27,6 +27,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onShowAll }) => {
           className="search-input"
           type="text"
           placeholder="Search for a country..."
+          aria-label="Country search input"
+          value={search}
           onChange={(event) => {
             setSearch(event.target.value);
           }}
@@ -40,7 +42,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onShowAll }) => {
           Search
         </button>
       </div>
-      <button className="show-all-btn" onClick={onShowAll}>
+      <button
+        className="show-all-btn"
+        aria-label="Show all countries"
+        onClick={() => {
+          setSearch("");
+          onShowAll();
+        }}
+      >
         Show All
       </button>
     </section>

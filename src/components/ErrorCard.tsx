@@ -6,9 +6,9 @@ interface ErrorCardProps {
 
 const ErrorCard: React.FC<ErrorCardProps> = ({ error }) => {
   return (
-    <section className="error-container" role="alert">
+    <div className="error-container" role="alert">
       <p className="error-message">{error}</p>
-    </section>
+    </div>
   );
 };
 
