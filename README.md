@@ -1,5 +1,9 @@
 # React Challenge
 
+## Live Demo
+
+You can view the deployed application here - https://main.demfo0mlr4isp.amplifyapp.com/
+
 ## Instructions
 
 This repository includes a naive implementation of a React application designed to search for, and display, information about countries (using https://restcountries.com/).
