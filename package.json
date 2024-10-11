@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "test": "vitest"
+    "test": "vitest",
+    "build": "vite build"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^6.5.0",
