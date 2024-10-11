@@ -3,9 +3,14 @@ import { useState } from "react";
 interface SearchBarProps {
   onSearch: (search: string) => void;
   onShowAll: () => void;
+  onClear: () => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onShowAll }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  onSearch,
+  onShowAll,
+  onClear,
+}) => {
   const [search, setSearch] = useState("");
 
   const handleSearch = () => {
@@ -21,7 +26,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onShowAll }) => {
   };
 
   return (
-    <section className="search-section">
+    <section className="search-section" data-testid="search-section">
       <div className="search-container">
         <input
           className="search-input"
@@ -33,25 +38,42 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, onShowAll }) => {
             setSearch(event.target.value);
           }}
           onKeyDown={handleKeyDown}
+          data-testid="search-input"
         />
         <button
           className="search-button"
+          aria-label="Search for countries"
           onClick={handleSearch}
           disabled={!search.length}
+          data-testid="search-button"
         >
           Search
         </button>
       </div>
-      <button
-        className="show-all-btn"
-        aria-label="Show all countries"
-        onClick={() => {
-          setSearch("");
-          onShowAll();
-        }}
-      >
-        Show All
-      </button>
+      <div className="btn-container">
+        <button
+          className="show-all-btn"
+          aria-label="Show all countries"
+          data-testid="show-all-button"
+          onClick={() => {
+            setSearch("");
+            onShowAll();
+          }}
+        >
+          Show All
+        </button>
+        <button
+          className="clear-btn"
+          aria-label="Clear countries"
+          data-testid="clear-all-button"
+          onClick={() => {
+            setSearch("");
+            onClear();
+          }}
+        >
+          Clear
+        </button>
+      </div>
     </section>
   );
 };

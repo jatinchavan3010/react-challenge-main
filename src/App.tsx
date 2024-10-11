@@ -58,9 +58,21 @@ const App = () => {
     fetchCountries(`${BASE_URL}/all`);
   };
 
+  const clearSearch = () => {
+    setCountryList([]);
+    setError({
+      message: "",
+      isError: false,
+    });
+  };
+
   return (
     <>
-      <SearchBar onSearch={handleSearch} onShowAll={handleShowAll} />
+      <SearchBar
+        onSearch={handleSearch}
+        onShowAll={handleShowAll}
+        onClear={clearSearch}
+      />
       {loading && <Loading />}
       {error.isError && <ErrorCard error={error.message} />}
       {!loading && !error.isError && <CountryList countryList={countryList} />}
